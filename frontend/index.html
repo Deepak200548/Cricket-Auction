@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Cricket Auction</title>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 connect-src http://127.0.0.1:8000 http://localhost:8000;
+                 style-src 'self' https://cdn.jsdelivr.net;
+                 script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* bidding panel overlay */
+    #bid-panel-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,.35);
+      display: none; align-items: center; justify-content: center; z-index: 1000;
+    }
+    #bid-panel { width: 420px; max-width: 95vw; }
+  </style>
+</head>
+<body class="container p-4">
+
+  <h1>Cricket Auction Dashboard</h1>
+
+  <div id="auction-status" class="mb-3 alert alert-secondary">Loading auction status…</div>
+
+  <div class="mb-3 d-flex gap-2">
+    <button id="btn-start" class="btn btn-success btn-sm">Start Auction</button>
+    <button id="btn-stop" class="btn btn-danger btn-sm">Stop Auction</button>
+  </div>
+
+  <div class="mb-3">
+    <label for="team-picker" class="form-label">Select your team</label>
+    <select id="team-picker" class="form-select" style="max-width:420px"></select>
+  </div>
+
+  <div class="mb-3">
+    <h5>Players</h5>
+    <div id="players-list" class="list-group"></div>
+  </div>
+
+  <div id="team-budget" class="mb-3 alert alert-info">Budget: —</div>
+
+  <!-- Bidding Panel (opened by app.js) -->
+  <div id="bid-panel-backdrop">
+    <div id="bid-panel" class="card shadow">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Place Bid</strong>
+        <button id="bp-close" class="btn btn-sm btn-outline-secondary">✕</button>
+      </div>
+      <div class="card-body">
+        <div class="mb-2">
+          <div class="text-muted">Player</div>
+          <div id="bp-player-name" class="fw-semibold">—</div>
+          <div id="bp-player-meta" class="small text-muted">—</div>
+        </div>
+
+        <div class="mb-2">
+          <div class="text-muted">Current Highest Bid</div>
+          <div id="bp-highest" class="fs-6">Loading…</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Your Bid</label>
+          <div class="input-group">
+            <span class="input-group-text">₹</span>
+            <input id="bp-amount" type="number" step="1" min="1" class="form-control" placeholder="Enter amount" />
+          </div>
+          <div class="mt-2 d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" data-bp-inc="50">+50</button>
+            <button class="btn btn-sm btn-outline-primary" data-bp-inc="100">+100</button>
+            <button class="btn btn-sm btn-outline-primary" data-bp-inc="500">+500</button>
+            <button class="btn btn-sm btn-outline-primary" data-bp-inc="1000">+1000</button>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button id="bp-cancel" class="btn btn-outline-secondary">Cancel</button>
+          <button id="bp-submit" class="btn btn-primary">Place Bid</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load app behavior -->
+  <script src="/static/app.js"></script>
+</body>
+</html>
