@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Cricket Auction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container p-4">
+
+<h1 class="d-flex justify-content-between align-items-center my-3">
+  <span>Cricket Auction</span>
+  <button id="btn-logout" class="btn btn-danger btn-sm" style="display:none;">Logout</button>
+</h1>
+
+<!-- Auth Card -->
+<div id="auth-card" class="card shadow-sm my-4" style="max-width:720px;">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login-pane">Login</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#register-pane">Register</button>
+      </li>
+      <li class="nav-item ms-auto">
+        <button class="nav-link text-danger fw-semibold" data-bs-toggle="tab" data-bs-target="#admin-login-pane">
+          Admin Login
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body tab-content">
+    <div id="login-pane" class="tab-pane fade show active">
+      <form id="login-form" class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" required minlength="8" />
+        </div>
+        <div class="col-12 d-grid">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="register-pane" class="tab-pane fade">
+      <form id="register-form" class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Name (optional)</label>
+          <input name="name" type="text" class="form-control" />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" required minlength="8" />
+        </div>
+        <div class="col-12 d-grid">
+          <button type="submit" class="btn btn-success">Create Account</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="admin-login-pane" class="tab-pane fade">
+      <div class="alert alert-warning small mb-3">
+        Admin login is for authorized organizers only.
+      </div>
+      <form id="admin-login-form" class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Admin Email</label>
+          <input name="email" type="email" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" required minlength="8" />
+        </div>
+        <div class="col-12 d-grid">
+          <button type="submit" class="btn btn-danger">Login as Admin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Mode selection -->
+<div id="mode-card" class="card shadow-sm my-4" style="max-width:680px; display:none;">
+  <div class="card-header"><strong>What would you like to do?</strong></div>
+  <div class="card-body">
+    <div class="d-flex flex-column gap-3">
+      <button id="btn-watch" class="btn btn-outline-primary">Watch the Auction</button>
+      <div class="text-center text-muted">— or —</div>
+      <button id="btn-register-player" class="btn btn-success">Register as a Player</button>
+    </div>
+  </div>
+</div>
+
+<!-- Player Registration -->
+<div id="player-card" class="card shadow-sm my-4" style="max-width:680px; display:none;">
+  <div class="card-header"><strong>Register as a Player</strong></div>
+  <div class="card-body">
+    <form id="player-form" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Full Name</label>
+        <input name="full_name" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Role</label>
+        <select name="role" class="form-select" required>
+          <option value="">Select</option>
+          <option>Faculty</option>
+          <option>Student</option>
+          <option>Alumni</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select">
+          <option value="">Select</option>
+          <option>Batter</option>
+          <option>Bowler</option>
+          <option>All-rounder</option>
+          <option>Wicket-keeper</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Age</label>
+        <input name="age" type="number" min="10" max="60" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Batting Style</label>
+        <input name="batting_style" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Bowling Style</label>
+        <input name="bowling_style" type="text" class="form-control" />
+      </div>
+      <div class="col-12">
+        <label class="form-label">Short Bio</label>
+        <textarea name="bio" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="col-12 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('mode-card').style.display=''; document.getElementById('player-card').style.display='none'">Back</button>
+        <button type="submit" class="btn btn-primary">Submit Registration</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/app.js"></script>
+
+</body>
+</html>

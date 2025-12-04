@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pymongo
+python-dotenv
+python-jose[cryptography]
+passlib[bcrypt]
+jinja2
+python-multipart
+bcrypt
+anyio
+annotated-types
+pydantic
+pydantic-core
